@@ -23,23 +23,15 @@ var blogSchema = new mongoose.Schema({
 });
 var Blog = mongoose.model("Blog", blogSchema);
 
-// Blog.create({
-//     title: "Test BLog",
-//     image: "https://ychef.files.bbci.co.uk/live/624x351/p03gg1lc.jpg",
-//     body: "First blog post"
-// });
-
 // Restful Routes
 app.get("/", function(req, res) {
     res.redirect("/blogs");
 });
 
+//Get all blogs route
 app.get("/blogs", function(req, res) {
     Blog.find({}, function(err, blogs) {
-        if (err)
-            console.log("Error!");
-        else
-            res.render('index.ejs', { blogs: blogs });
+        err ? console.log("Error!") : res.render('index.ejs', { blogs: blogs });
     });
 });
 
